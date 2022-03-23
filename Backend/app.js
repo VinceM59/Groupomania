@@ -15,4 +15,7 @@ app.use((req, res, next) => {
   next();
 });
 
+const db = require("./models");
+//db.sequelize.sync();
+
 module.exports = app;

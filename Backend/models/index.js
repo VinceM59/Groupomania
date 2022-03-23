@@ -1,4 +1,6 @@
 require("dotenv").config();
+const Sequelize = require("sequelize");
+const db = {};
 
 let sequelize;
 sequelize = new Sequelize(
@@ -11,6 +13,17 @@ sequelize = new Sequelize(
   }
 );
 
+try {
+  sequelize.authenticate();
+  console.log("Connecté à la base de données MySQL!");
+} catch (error) {
+  console.error("Impossible de se connecter, erreur suivante :", error);
+}
+
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+
+module.exports = db;
 /**
  * users :
  *  - id
