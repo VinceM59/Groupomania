@@ -23,6 +23,8 @@ try {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+//db.Users = require("./users.js")(sequelize, Sequelize);
+
 module.exports = db;
 /**
  * users :
