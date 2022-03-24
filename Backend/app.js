@@ -16,6 +16,5 @@ app.use((req, res, next) => {
 });
 
 const db = require("./models");
-db.sequelize.sync();
-
+db.sequelize.sync().then(console.log("connexion à la BDD"));
 module.exports = app;
