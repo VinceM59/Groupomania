@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -14,6 +15,9 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./models");
 db.sequelize.sync().then(console.log("connexion à la BDD"));
