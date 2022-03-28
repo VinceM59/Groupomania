@@ -14,6 +14,7 @@ exports.createComment = (req, res, next) => {
 };
 
 exports.findOneComment = (req, res, next) => {
+  console.log("Je suis dans findOneComment");
   Comment.findOne({ where: { id: req.params.id } })
     .then((comment) => {
       console.log(comment);
