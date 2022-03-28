@@ -32,9 +32,9 @@ db.sequelize.sync().then(console.log("connexion à la BDD"));
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/auth", authRoutes);
-app.use("api/comment", auth, commentRoutes);
-app.use("api/like", auth, likeRoutes);
-app.use("api/post", auth, postRoutes);
-app.use("api/user", auth, userRoutes);
+app.use("/api/comment", auth, commentRoutes);
+app.use("/api/like", auth, likeRoutes);
+app.use("/api/post", auth, postRoutes);
+app.use("/api/user", auth, userRoutes);
 
 module.exports = app;
