@@ -2,6 +2,7 @@ const models = require("../models");
 const Comment = models.comments;
 
 exports.createComment = (req, res, next) => {
+  console.log("salutations");
   const comment = new Comment({
     content: req.body.content,
     userId: req.body.userId,
