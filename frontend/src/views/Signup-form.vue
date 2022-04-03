@@ -1,41 +1,90 @@
 <template>
-  <div>
-      <div class = "register">
-          <p class ="register_text">salut !</p>
-      </div> 
-      <div class="main-w3layouts wrapper">
-		<h1>Inscription</h1>
-		<div class="main-agileinfo">
-			<div class="agileits-top">
-				<form action="#" method="post">
-					<input class="text" type="text" name="Lastname" placeholder="Lastname" required="">
-					<input class="text" type="text" name="Firstname" placeholder="Firstname" required="">
-					<input class="text email" type="email" name="email" placeholder="Email" required="">
-					<input class="text" type="password" name="password" placeholder="Password" required="">
-					<input class="text w3lpass" type="password" name="password" placeholder="Confirm Password" required="">
-					<div class="wthree-text">
-						<label class="anim">
-							<input type="checkbox" class="checkbox" required="">
-							<span>I Agree To The Terms & Conditions</span>
-						</label>
-						<div class="clear"> </div>
-					</div>
-					<input type="submit" value="SIGNUP">
-				</form>
-				<p>Don't have an Account? <a href="#"> Login Now!</a></p>
-			</div>
-		</div> 
-      </div>
-  </div>
+	<div class="signup">
+		<div class="formulaire">
+			<h1>Bienvenue sur Groupomania</h1>
+			<form>
+				<div>
+					<label for="lastname">Nom</label>
+					<input type="text" id="lastname" v-model="user.lastname" required>
+				</div>
+				<div>
+					<label for="firstname">Prénom</label>
+					<input type="text" id="firstname" v-model="user.firstname" required>
+				</div>
+				<div>
+					<label for="email">Email</label>
+					<input type="text" id="email" v-model="user.email" required>
+				</div>
+				<div>
+					<label for="password">Password</label>
+					<input type="password" id="password" v-model="user.password" required>
+				</div>
+			</form>
+		</div>
+		<button id="signupButton" type="button" @click="signup">Inscription</button>
+	</div>
+  
 </template>
 
 <script>
+import axios from "axios"
 export default {
-    name:'Signup-form'
+	name:"Signup-form",
+	data(){
+		return{
+			user:{
+				lastname:null,
+				firstname:null,
+				email:null,
+				password:null,
+			}
+		}
+	},
+	components:{},
+	methods:{
+		signup(e){
+			axios.post("http://localhost:3000/api/auth/signup", this.user)
+			.then((result)=>{
+				console.log(result)
+				alert("utilisateur crée")
+			})
+			e.preventDefault();
+		}
+	}
 
 }
 </script>
 
 <style scoped>
+
+.signup{
+	border: solid 0.1rem #091f43;
+	border-radius: 1rem;
+	box-shadow: 0.5rem;
+		}
+	.formulaire{
+		width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;}
+		.form{
+            margin: 1em;
+            display: flex;
+            flex-direction: column;
+            align-items: baseline;}
+			.margin{
+				display: flex;
+				margin: 1rem;
+			}
+			.div{
+                margin: 0.1em;
+                display: flex;
+                width: 95%;}
+                .input{
+                    width: 80%;
+                    flex: 1;
+                }
+            
+
 
 </style>
