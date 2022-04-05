@@ -1,11 +1,14 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
+  console.log("Je passe dans le middleware auth");
   try {
     const token = req.headers.authorization.split(" ")[1];
+    console.log("Token retrouvé : " + token);
     const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
     const userId = decodedToken.userId;
-    if (req.body.userId && req.body.userId !== userId) {
+    console.log(decodedToken);
+    if (!userId) {
       throw "User ID non valide";
     } else {
       next();

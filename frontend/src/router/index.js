@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import Signup from "../views/Signup-form.vue";
-import login from "../views/login.vue";
+import login from "../views/Login-form.vue";
 const routes = [
   {
     path: "/",
@@ -18,13 +18,13 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
   {
-    path: "/signup-form",
+    path: "/signup",
     name: "Signup-form",
     component: Signup,
   },
   {
     path: "/login",
-    name: "login",
+    name: "Login-form",
     component: login,
   },
 ];
