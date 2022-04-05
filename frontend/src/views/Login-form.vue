@@ -20,6 +20,7 @@
 
 <script>
 import axios from "axios"
+import router from "../router"
 export default {
     name:"Login-form",
     data(){
@@ -35,14 +36,22 @@ export default {
         submit(){
             axios.post("http://localhost:3000/api/auth/login",{
 
-                email:this.email,
-                password:this.password
-            },
-                )
+                email:this.user.email,
+                password:this.user.password
+            })
+            .then((res)=>{
+                console.log(res)
+                if (res.status ===200){
+                    router.push("/")
+                }else{
+                    alert("erreur email ou mot de passe")
+                }
+            }) 
+            }
         }
     }
 
-}
+
 </script>
 
 <style scoped>

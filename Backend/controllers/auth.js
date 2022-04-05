@@ -29,6 +29,7 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
+  console.log("Je suis dans le login");
   User.findOne({ email: req.body.email })
     .then((user) => {
       if (!user) {
@@ -37,6 +38,7 @@ exports.login = (req, res, next) => {
       bcrypt
         .compare(req.body.password, user.password)
         .then((valid) => {
+          console.log("je suis dans bcrypt");
           if (!valid) {
             return res.status(401).json({ error: "Mot de passe incorrect !" });
           }
@@ -46,6 +48,7 @@ exports.login = (req, res, next) => {
               expiresIn: "24h",
             }),
           });
+          console.log("tout va bien ");
         })
         .catch((error) => res.status(500).json({ error }));
     })
