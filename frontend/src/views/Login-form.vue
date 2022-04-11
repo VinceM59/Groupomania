@@ -42,11 +42,18 @@ export default {
             .then((res)=>{
                 console.log(res)
                 if (res.status ===200){
-                    router.push("/")
+                    router.push("/home")
                 }else{
                     alert("erreur email ou mot de passe")
                 }
             }) 
+            // .then((value)=>{
+            //     const token = JSON.stringify(value.token);
+            //     const userId = JSON.stringify(value.userId)
+            //     localStorage.setItem("tokenUser", token)
+            //     localStorage.setItem("userId", userId)
+            //     router.push("/")
+            // })
             }
         }
     }

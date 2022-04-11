@@ -13,6 +13,7 @@ module.exports = (req, res, next) => {
     } else {
       next();
     }
+    console.log("erreur");
   } catch {
     res.status(401).json({
       error: new Error("Requête non valide!"),

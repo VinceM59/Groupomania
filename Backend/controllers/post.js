@@ -5,10 +5,11 @@ const Comment = models.comments;
 const Like = models.likes;
 
 exports.createPost = (req, res, next) => {
+  console.log("salutations");
   const post = new Post({
     content: req.body.content,
     userId: req.body.userId,
-    image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+    //image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
   });
 
   post

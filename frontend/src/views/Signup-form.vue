@@ -22,7 +22,7 @@
 		<button id="signupButton" type="submit">Inscription</button>
 			</form>
 		</div>
-		<p>Vous avez déjà un compte ?  <router-link to ="/login">Connexion</router-link></p>
+		<p>Vous avez déjà un compte ?  <router-link to ="/">Connexion</router-link></p>
 	</div>
   
 </template>
