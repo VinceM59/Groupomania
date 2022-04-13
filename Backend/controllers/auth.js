@@ -30,11 +30,17 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
   console.log("Je suis dans le login");
-  User.findOne({ email: req.body.email })
-    .then((user) => {
-      if (!user) {
+  User.findAll({
+    where: {
+      email: req.body.email,
+    },
+  })
+    .then((users) => {
+      console.log(users);
+      if (!users || users.length !== 1) {
         return res.status(401).json({ error: "Utilisateur non trouvé !" });
       }
+      let user = users[0];
       bcrypt
         .compare(req.body.password, user.password)
         .then((valid) => {

@@ -1,14 +1,19 @@
 <template>
-  <div id="createPost">
-      <h1>Mon Post</h1>
-      <div class="description">
-          <input type="text" id="title" placeholder="Titre" v-model="post.title">
-      </div>
-      <div class="description">
-          <textarea id="post" placeholder="Post"  v-model="post.post"></textarea>
-        </div>
-        <button id="postButton" @click="createPost">Publier</button>
-  </div>
+    <div id="createPost">
+        <form @submit.prevent="createPost">
+            <div id="text">
+                <textarea name="textarea" placeholder="Publiez votre message" v-model="text"></textarea>
+            </div>
+            <div id="preview" v-if="preview">
+                <img :src="preview" :alt="preview">
+            </div>         
+            <div id="btns">                
+                <input type="file" ref="file" name="file" class="upload" id="file" @change="selectFile">             
+                <input type="submit" value="J'envoie !" class="btn">
+            </div>
+            <p>{{errMsg}}</p>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -30,6 +35,10 @@ export default {
                 title: this.post.title,
                 post:this.post.post,
                 userId:this.post.userId
+            }, {
+                headers: {
+                    Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTY5MzAxNywiZXhwIjoxNjQ5Nzc5NDE3fQ.eR8pNNk9qfe2zxJuQpbqvj39gu-gDxlbMmyVbkYfIwE"
+                }
             })
             .then((res)=>{
 				console.log(res);

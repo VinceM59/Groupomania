@@ -12,7 +12,7 @@
         <div id="routes" v-if="!logged">
             <router-link to="/signup" class="link">Sign up</router-link>
             <router-link to="/" class="link">Login</router-link> 
-            <router-link to="" class="link">Logout</router-link>   
+            <router-link to="/" class="link">Logout</router-link>   
         </div>  
         </div>           
     </header>

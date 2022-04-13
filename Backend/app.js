@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const auth = require("./middleware/auth");
+const helmet = require("helmet");
 
 const authRoutes = require("./routes/auth");
 const commentRoutes = require("./routes/comment");
@@ -11,7 +12,9 @@ const userRoutes = require("./routes/user");
 
 const app = express();
 
+//app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use((req, res, next) => {
+  console.log(req.headers);
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -34,7 +37,7 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/auth", authRoutes);
 app.use("/api/comment", auth, commentRoutes);
 app.use("/api/like", auth, likeRoutes);
-app.use("/api/post", auth, postRoutes);
+app.use("/api/post", postRoutes);
 app.use("/api/user", auth, userRoutes);
 
 module.exports = app;

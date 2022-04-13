@@ -6,6 +6,7 @@ const Like = models.likes;
 
 exports.createPost = (req, res, next) => {
   console.log("salutations");
+  console.log(req.body);
   const post = new Post({
     content: req.body.content,
     userId: req.body.userId,
