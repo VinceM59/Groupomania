@@ -5,13 +5,11 @@
             <img src="../assets/icon-left-font.png" alt="GROUPOMANIA">
             <h3>{{header}}</h3>  
         </div>  
-        <form action="" class="formulaire">
-               <input class="champ" type="text" value="recherche"/>
-                    <input class="bouton" type="button" value=" " />   
-                </form>
+        
         <div id="routes" v-if="!logged">
             <router-link to="/signup" class="link">Sign up</router-link>
             <router-link to="/" class="link">Login</router-link> 
+            <router-link to="/createPost" class="link">Création post</router-link>
             <router-link to="/" class="link">Logout</router-link>   
         </div>  
         </div>           

@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import store from '../store/index.js'
 import axios from "axios"
 import router from "../router"
 export default {
@@ -41,19 +42,20 @@ export default {
             })
             .then((res)=>{
                 console.log(res)
+                const localData =res
+                store.state.tokenLS=true
+                localData.JSON().then(data=>{
+                    localStorage.setItem("userId", data.userId)
+                    localStorage.setItem("token", data.token)
+
+                })
                 if (res.status ===200){
                     router.push("/home")
                 }else{
                     alert("erreur email ou mot de passe")
                 }
             }) 
-            // .then((value)=>{
-            //     const token = JSON.stringify(value.token);
-            //     const userId = JSON.stringify(value.userId)
-            //     localStorage.setItem("tokenUser", token)
-            //     localStorage.setItem("userId", userId)
-            //     router.push("/")
-            // })
+            .catch((error)=>{console.error(error)})
             }
         }
     }

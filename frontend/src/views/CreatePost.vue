@@ -1,13 +1,11 @@
 <template>
+
     <div id="createPost">
         <form @submit.prevent="createPost">
             <div id="text">
                 <textarea name="textarea" placeholder="Publiez votre message" v-model="text"></textarea>
-            </div>
-            <div id="preview" v-if="preview">
-                <img :src="preview" :alt="preview">
             </div>         
-            <div id="btns">                
+            <div id="buttons">                
                 <input type="file" ref="file" name="file" class="upload" id="file" @change="selectFile">             
                 <input type="submit" value="J'envoie !" class="btn">
             </div>
@@ -20,6 +18,7 @@
 import axios from 'axios';
 export default {
     name:"CreatePost",
+    
     data(){
         return{
             post:{
