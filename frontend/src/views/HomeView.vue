@@ -1,7 +1,11 @@
 <template>
   <div class="home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
+    <div>
     <Header />
+    </div>
+    <div class="posts">
+      <div class="post" v-for="post in posts" :key="post.id"></div>
+    </div>
   </div>
 </template>
 

@@ -3,7 +3,7 @@
 
     <div id="createPost">
 <div>
-  <input type="button" value="Retour" onclick="history.go(-1)">
+  <router-link :to="'/home/'"><button class="button" type="button">Retour</button></router-link>
 </div>
         <form
       class="createPost"
@@ -86,7 +86,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .description
 {

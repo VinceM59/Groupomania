@@ -12,7 +12,7 @@
                     <label for="password">password</label>
                     <input type="password" id="password" v-model="user.password" required="">
                 </div>
-     <button v-on:click.prevent.stop="loginUser" id="loginButton" type="submit">Connexion</button>
+     <button  id="loginButton" type="submit">Connexion</button>
             </form>
      </div>
      <p>Vous n'avez pas de compte ?  <router-link to ="/signup">Inscrivez-vous</router-link></p>
@@ -21,7 +21,9 @@
 </template>
 
 <script>
-
+import store from '../store/index.js'
+import axios from "axios"
+import router from "../router"
 export default {
     name:"Login-form",
     components:{},
@@ -35,35 +37,62 @@ export default {
         };
     },
     methods:{
-        login() {
-			if (!this.user.email || !this.user.password){
-                this.msgErr = "Champs manquant";
-                return;
-            }
-            const request = new XMLHttpRequest();
-            request.open("post", "http://localhost:3000/api/auth/login", true);
-            request.setRequestHeader(
-                'Content-Type',
-                'application/json;charset=UTF-8',
-            );
-            const data = {
+
+submit(){
+            axios.post("http://localhost:3000/api/auth/login",{
+
                 email:this.user.email,
-                password:this.user.password,
-            };
-            request.send(JSON.stringify(data));
-            request.onreadystatechange=()=>{
-                if (request.readyState===XMLHttpRequest.DONE){
-                    if (request.status===200){
-                        const user = JSON.parse(request.responseText);
-                        localStorage.setItem("token", user.token);
-                        localStorage.setItem("user", JSON.stringify(user));
-                        this.$router.push("/home");
-                    }else{
-                        alert("une erreur est survenue");
-                    }
+                password:this.user.password
+            })
+            .then((res)=>{
+                console.log(res)
+                const localData =res
+                store.state.tokenLS=true
+                localData.JSON().then(data=>{
+                    localStorage.setItem("userId", data.userId)
+                    localStorage.setItem("token", data.token)
+
+                })
+                if (res.status ===200){
+                    router.push("/home")
+                }else{
+                    alert("erreur email ou mot de passe")
                 }
-            };
-		},
+            }) 
+            .catch((error)=>{console.error(error)})
+            }
+
+
+
+        // login() {
+		// 	if (!this.user.email || !this.user.password){
+        //         this.msgErr = "Champs manquant";
+        //         return;
+        //     }
+        //     const request = new XMLHttpRequest();
+        //     request.open("post", "http://localhost:3000/api/auth/login", true);
+        //     request.setRequestHeader(
+        //         'Content-Type',
+        //         'application/json;charset=UTF-8',
+        //     );
+        //     const data = {
+        //         email:this.user.email,
+        //         password:this.user.password,
+        //     };
+        //     request.send(JSON.stringify(data));
+        //     request.onreadystatechange=()=>{
+        //         if (request.readyState===XMLHttpRequest.DONE){
+        //             if (request.status===200){
+        //                 const user = JSON.parse(request.responseText);
+        //                 localStorage.setItem("token", user.token);
+        //                 localStorage.setItem("user", JSON.stringify(user));
+        //                 this.$router.push("/home");
+        //             }else{
+        //                 alert("une erreur est survenue");
+        //             }
+        //         }
+        //     };
+		// },
         },
     };
 
