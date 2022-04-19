@@ -8,7 +8,7 @@
 
         <div class="profil">
             <router-link to="/createPost"><button  class="button" type="button" >Créer votre post</button></router-link>
-            <router-link to=""><button class="button" type="button">Profil</button></router-link>
+            <router-link to="/profil"><button class="button" type="button">Profil</button></router-link>
             <button v-on:click.prevent.stop="logout" class="button" type="submit">Déconnexion</button>  
         </div>
         

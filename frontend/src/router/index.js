@@ -2,12 +2,18 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import Signup from "../views/Signup-form.vue";
 import login from "../views/Login-form.vue";
-import CreatePost from "../views/CreatePost.vue";
+import CreatePost from "../views/CreatePost";
+import Profil from "../views/Profil-form.vue";
 const routes = [
   {
     path: "/",
     name: "Login-form",
     component: login,
+  },
+  {
+    path: "/signup",
+    name: "Signup-form",
+    component: Signup,
   },
   {
     path: "/home",
@@ -20,9 +26,9 @@ const routes = [
     component: CreatePost,
   },
   {
-    path: "/signup",
-    name: "Signup-form",
-    component: Signup,
+    path: "/profil",
+    name: "Profil-form",
+    component: Profil,
   },
 ];
 
