@@ -20,7 +20,13 @@
 export default {
     name: 'Header-nav',
     
+logout() {
+      this.$store.commit('logout');
+      localStorage.clear();
+      this.$router.push('/');
+        },
 }
+
 </script>
 
 <style scoped>
