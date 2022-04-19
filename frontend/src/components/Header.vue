@@ -1,28 +1,25 @@
 <template>
-    <header>
+    <header class="header">
+        <div class="title">Bienvenue chez Groupomania</div>
         <div id="navigation">
         <div id="logo">
-            <img src="../assets/icon-left-font.png" alt="GROUPOMANIA">
-            <h3>{{header}}</h3>  
+            <img src="../assets/icon-left-font.png" alt="GROUPOMANIA"> 
         </div>  
+
+        <div class="profil">
+            <router-link to="/createPost"><button  class="button" type="button" >Créer votre post</button></router-link>
+            <router-link to=""><button class="button" type="button">Profil</button></router-link>
+            <button v-on:click.prevent.stop="logout" class="button" type="submit">Déconnexion</button>  
+        </div>
         
-        <div id="routes" v-if="!logged">
-            <router-link to="/signup" class="link">Sign up</router-link>
-            <router-link to="/" class="link">Login</router-link> 
-            <router-link to="/createPost" class="link">Création post</router-link>
-            <router-link to="/" class="link">Logout</router-link>   
-        </div>  
         </div>           
     </header>
 </template>
 
 <script>
 export default {
-    name: 'Header',
-    // props: {
-    //     header: String,
-    //     home: Boolean
-    // }
+    name: 'Header-nav',
+    
 }
 </script>
 
@@ -49,7 +46,13 @@ img
     height: 12rem;
 }
 
-
+.button {
+    margin: 1rem;
+  font-size: 20px;
+  border-radius: 25px;
+  background: rgba(23, 35, 60);
+  color: white;
+}
 .link{
     text-align: center;
     padding: 1rem;

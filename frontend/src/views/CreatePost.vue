@@ -1,16 +1,29 @@
 <template>
 
     <div id="createPost">
-        <form @submit.prevent="createPost">
-            <div id="text">
-                <textarea name="textarea" placeholder="Publiez votre message" v-model="text"></textarea>
-            </div>         
-            <div id="buttons">                
-                <input type="file" ref="file" name="file" class="upload" id="file" @change="selectFile">             
-                <input type="submit" value="J'envoie !" class="btn">
-            </div>
-            <p>{{errMsg}}</p>
-        </form>
+        <form
+      class="createPost"
+      enctype="multipart/form-data"
+      method="post"
+      @submit.prevent="createPost()"
+    >
+      <h3>Créer votre post :</h3>
+      <label
+        >Texte :<input name="text" id="text" type="text" v-model="post.text"
+      /></label>
+      <label
+        >Fichier :
+        <input name="image" id="image" type="file" @change="onFileChange"
+      /></label>
+      <button
+        v-on:click.prevent.stop="createPost"
+        aria-label="Postez"
+        class="btn"
+        type="submit"
+      >
+        Postez
+      </button>
+    </form>
     </div>
 </template>
 
