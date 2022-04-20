@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import store from '../store/index.js'
 import axios from "axios"
 import router from "../router"
 export default {
@@ -45,14 +44,10 @@ submit(){
                 password:this.user.password
             })
             .then((res)=>{
-                console.log(res)
-                const localData =res
-                store.state.tokenLS=true
-                localData.JSON().then(data=>{
-                    localStorage.setItem("userId", data.userId)
-                    localStorage.setItem("token", data.token)
-
-                })
+                console.log(res.data.token)
+                let data = res.data;
+                localStorage.setItem("userId", data.userId)
+                localStorage.setItem("token", data.token)
                 if (res.status ===200){
                     router.push("/home")
                 }else{

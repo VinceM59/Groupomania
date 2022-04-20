@@ -48,7 +48,7 @@ export default {
                 userId:this.post.userId
             }, {
                 headers: {
-                    Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTY5MzAxNywiZXhwIjoxNjQ5Nzc5NDE3fQ.eR8pNNk9qfe2zxJuQpbqvj39gu-gDxlbMmyVbkYfIwE"
+                    "Authorization": "Bearer " + localStorage.getItem ("token")
                 }
             })
             .then((res)=>{

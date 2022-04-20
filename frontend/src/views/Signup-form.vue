@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import router from "../router"
 import axios from "axios"
 export default {
 	name:"Signup-form",
@@ -53,10 +54,11 @@ export default {
 			.then((res)=>{
 				console.log(res);
 				alert("Compte validé")
+				router.push("/")
 			})
 			.catch((error)=>{
 				console.log(error);
-				alert("erreur")
+				alert("Adresse mail déjà utilisée")
 			})
 	
 	

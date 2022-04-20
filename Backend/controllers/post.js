@@ -8,7 +8,7 @@ exports.createPost = (req, res, next) => {
   console.log("salutations");
   console.log(req.body);
   const post = new Post({
-    content: req.body.content,
+    content: req.body.post,
     userId: req.body.userId,
     //image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
   });

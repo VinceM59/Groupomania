@@ -56,7 +56,7 @@ export default {
   methods:{
     account(){
       const request = new XMLHttpRequest();
-      request.open("get", "http://localhost:3000/api/user/:id", true);
+      request.open("get", "http://localhost:3000/api/user/", true);
       request.setRequestHeader(
         "Content-Type",
         "application/json;charset=UTF-8"
@@ -78,7 +78,7 @@ export default {
 
     modifyProfile(){
       const request=new XMLHttpRequest();
-      request.open("put", "http://localhost:3000/api/user/:id" + this.userId, true);
+      request.open("put", "http://localhost:3000/api/user/" + this.userId, true);
       request.setRequestHeader(
         "Authorization",
         "Bearer" + localStorage.getItem("token")
