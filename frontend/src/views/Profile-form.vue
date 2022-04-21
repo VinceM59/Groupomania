@@ -39,68 +39,77 @@
 </template>
 
 <script>
+//import axios from "axios"
 export default {
   // eslint-disable-next-line
   name:"Profile",
   components:{},
   data(){
     return{
-      user:{},
-      Profile: false,
+      user:{
+        firstName:"",
+        lastName:"",
+        email:"",
+        password:""
+      },
+      msgErr :null,
     };
   },
-  created(){
-    this.account();
-  },
+  
 
   methods:{
-    account(){
-      const request = new XMLHttpRequest();
-      request.open("get", "http://localhost:3000/api/user/", true);
-      request.setRequestHeader(
-        "Content-Type",
-        "application/json;charset=UTF-8"
-      );
-      request.setRequestHeader(
-        "Authorization",
-        "Bearer" + localStorage.getItem("token")
-      );
-      request.send();
-      request.onreadystatechange=()=>{
-        if (request.readyState == XMLHttpRequest.DONE) {
-          if (request.status == 200) {
-            const user = JSON.parse(request.responseText);
-            this.user = user;
-          }
-        }
-      }
-    },
 
-    modifyProfile(){
-      const request=new XMLHttpRequest();
-      request.open("put", "http://localhost:3000/api/user/" + this.userId, true);
-      request.setRequestHeader(
-        "Authorization",
-        "Bearer" + localStorage.getItem("token")
-      );
-      request.setRequestHeader(
-        "Content-Type",
-        "application/json;charset=UTF-8"
-      );
-      request.send(JSON.stringify({
-        firstName:this.user.firstName,
-        lastName:this.user.lastName,
-        email :this.user.newEmail,
-        password:this.user.newPassword
-      }),);
-      request.onreadystatechange = () => {
-        if (request.readyState == XMLHttpRequest.DONE) {
-          if (request.status == 200) {
-            this.$router.go(0);
-          }
-        }
-      }
-    }
+
+
+
+
+    // account(){
+    //   const request = new XMLHttpRequest();
+    //   request.open("get", "http://localhost:3000/api/user/", true);
+    //   request.setRequestHeader(
+    //     "Content-Type",
+    //     "application/json;charset=UTF-8"
+    //   );
+    //   request.setRequestHeader(
+    //     "Authorization",
+    //     "Bearer" + localStorage.getItem("token")
+    //   );
+    //   request.send();
+    //   request.onreadystatechange=()=>{
+    //     if (request.readyState == XMLHttpRequest.DONE) {
+    //       if (request.status == 200) {
+    //         const user = JSON.parse(request.responseText);
+    //         this.user = user;
+    //       }
+    //     }
+    //   }
+    // },
+
+    // modifyProfile(){
+    //   const request=new XMLHttpRequest();
+    //   request.open("put", "http://localhost:3000/api/user/" + this.userId, true);
+    //   request.setRequestHeader(
+    //     "Authorization",
+    //     "Bearer" + localStorage.getItem("token")
+    //   );
+    //   request.setRequestHeader(
+    //     "Content-Type",
+    //     "application/json;charset=UTF-8"
+    //   );
+    //   request.send(JSON.stringify({
+    //     firstName:this.user.firstName,
+    //     lastName:this.user.lastName,
+    //     email :this.user.newEmail,
+    //     password:this.user.newPassword
+    //   }),);
+    //   request.onreadystatechange = () => {
+    //     if (request.readyState == XMLHttpRequest.DONE) {
+    //       if (request.status == 200) {
+    //         this.$router.go(0);
+    //       }
+    //     }
+    //   }
+    // }
   }
 
 }

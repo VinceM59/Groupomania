@@ -26,7 +26,7 @@ const routes = [
     component: CreatePost,
   },
   {
-    path: "/profil",
+    path: "/profile",
     name: "profil-form",
     component: Profil,
   },

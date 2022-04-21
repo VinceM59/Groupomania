@@ -8,8 +8,8 @@
 
         <div class="profil">
             <router-link to="/createPost"><button  class="button" type="button" >Créer votre post</button></router-link>
-            <router-link to="/profil"><button class="button" type="button">Profil</button></router-link>
-            <button v-on:click.prevent.stop="logout" class="button" type="submit">Déconnexion</button>  
+            <router-link to="/profile"><button class="button" type="button">Profil</button></router-link>
+            <router-link to="/" @click="logout" ><button class="button" type="button" >Déconnexion</button></router-link>  
         </div>
         
         </div>           
@@ -17,15 +17,19 @@
 </template>
 
 <script>
+import router from "../router"
 export default {
     name: 'Header-nav',
-    
-// logout() {
-//       this.$store.commit('logout');
-//       localStorage.clear();
-//       this.$router.push('/');
-//         },
+
+    methods:{
+        logout(){
+            router.push("/")
+            localStorage.clear()
+            console.log("user déconnecté");
+        }
+    }
 }
+
 
 </script>
 
