@@ -38,6 +38,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/comment", auth, commentRoutes);
 app.use("/api/like", auth, likeRoutes);
 app.use("/api/post", postRoutes);
-app.use("/api/user", auth, userRoutes);
+app.use("/api/user", userRoutes);
 
 module.exports = app;

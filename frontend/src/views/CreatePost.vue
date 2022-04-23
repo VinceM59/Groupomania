@@ -36,7 +36,7 @@ export default {
             post:{
                 content:null,
                 pictureURL:null,
-                userId:null,
+                userId:localStorage.getItem("userId"),
             }
         }
     },

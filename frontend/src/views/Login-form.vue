@@ -49,13 +49,15 @@ submit(){
                 localStorage.setItem("userId", data.userId)
                 localStorage.setItem("token", data.token)
                 if (res.status ===200){
-                    router.push("/home")
+                    router.push("/profile")
                 }else{
                     alert("erreur email ou mot de passe")
                 }
             }) 
             .catch((error)=>{console.error(error)})
             }
+
+            
 
 
 
