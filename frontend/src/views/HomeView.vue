@@ -10,7 +10,7 @@
           <p> Le {{post.createdAt}}</p>
         </div>
         <div class="contenu">
-          <p class="text">{{posts.content}}</p>
+          <p class="text">{{post.content}}</p>
           <img class="picture" alt="post.pictureURL" src="">
         </div>
       </div>
@@ -22,7 +22,7 @@
 <script>
 // @ is an alias to /src
 import Header from '@/components/Header.vue'
-import axios from "axios"
+//import axios from "axios"
 
 
 export default {
@@ -35,26 +35,30 @@ export default {
             posts:{
                 content:"",
                 pictureURL:"",
-                userId:""
+                userId:"",
+                createdAt:""
             },
             user: JSON.parse(localStorage.getItem("user")),
             msgErr :null,
         };
     },
-    lookPosts(){
-      axios.get("http://localhost:3000/api/post",{
-        posts:this.posts.content,
-        pictureURL:this.posts.pictureURL,
-        userId:this.posts.userId
-      },{
-        Headers:{
-          "Authorization": "Bearer " + localStorage.getItem ("token")
+    getAllPosts(){
+      fetch(`http://localhost:3000/api/post/${localStorage.getItem("userId")}`,{
+        headers:{
+          Authorization : `Bearer ${localStorage.getItem("token")}`
         }
       })
-      .then((res)=>{
-        console.log(res);
-        console.log("salut");
+      .then(res=>res.json())
+      .then(data=>{
+        console.log(data);
+        this.posts=data
       })
+      // axios.get("http://localhost:3000/api/post/",{
+      //   content : this.posts.content
+      // })
+      // .then((response)=>{
+      //   console.log(response);
+      // })
     }
   
 }
@@ -70,7 +74,7 @@ export default {
 }
 
 .post {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
   border: 1px solid black;

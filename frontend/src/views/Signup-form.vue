@@ -1,4 +1,8 @@
 <template>
+<main>
+ <div id="logo">
+            <img src="../assets/icon-above-font.png" alt="GROUPOMANIA"> 
+        </div>
 	<div class="signup">
 		<div class="formulaire">
 			<h1>Bienvenue sur Groupomania</h1>
@@ -24,7 +28,7 @@
 		</div>
 		<p>Vous avez déjà un compte ?  <router-link to ="/">Connexion</router-link></p>
 	</div>
-  
+</main>
 </template>
 
 <script>
@@ -99,6 +103,9 @@ label
 {
     width: 80%;
     flex: 1;
+}
+img{
+	width: 12rem;
 }
             
 

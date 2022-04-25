@@ -1,5 +1,8 @@
 <template>
 <main>
+      <div id="logo">
+            <img src="../assets/icon-above-font.png" alt="GROUPOMANIA"> 
+        </div>
   <div class="login">
       <div class="formulaire">
         <h1>Connexion</h1>
@@ -56,40 +59,6 @@ submit(){
             }) 
             .catch((error)=>{console.error(error)})
             }
-
-            
-
-
-
-        // login() {
-		// 	if (!this.user.email || !this.user.password){
-        //         this.msgErr = "Champs manquant";
-        //         return;
-        //     }
-        //     const request = new XMLHttpRequest();
-        //     request.open("post", "http://localhost:3000/api/auth/login", true);
-        //     request.setRequestHeader(
-        //         'Content-Type',
-        //         'application/json;charset=UTF-8',
-        //     );
-        //     const data = {
-        //         email:this.user.email,
-        //         password:this.user.password,
-        //     };
-        //     request.send(JSON.stringify(data));
-        //     request.onreadystatechange=()=>{
-        //         if (request.readyState===XMLHttpRequest.DONE){
-        //             if (request.status===200){
-        //                 const user = JSON.parse(request.responseText);
-        //                 localStorage.setItem("token", user.token);
-        //                 localStorage.setItem("user", JSON.stringify(user));
-        //                 this.$router.push("/home");
-        //             }else{
-        //                 alert("une erreur est survenue");
-        //             }
-        //         }
-        //     };
-		// },
         },
     };
 
@@ -124,6 +93,9 @@ label
 {
     width: 80%;
     flex: 1;
+}
+img{
+    width: 12rem;
 }
 
 </style>

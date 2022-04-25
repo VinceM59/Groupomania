@@ -2,9 +2,6 @@
 
 
     <div id="createPost">
-<div>
-  <router-link :to="'/home/'"><button class="button" type="button">Retour</button></router-link>
-</div>
         <form
       class="createPost"
       enctype="multipart/form-data"
@@ -13,7 +10,7 @@
     >
       <h3>Créer votre post :</h3>
       <label>Texte :<input name="text" id="text" type="text" v-model="post.content"/></label>
-      <label>Fichier :<input name="image" id="image" type="file" @change="onFileChange"/></label>
+      <label>Fichier :<input name="image" id="image" type="file" @change="pictureURL"/></label>
       <button
         v-on:click.prevent.stop="createPost"
         aria-label="Postez"
@@ -23,6 +20,9 @@
         Postez
       </button>
     </form>
+<div>
+  <router-link :to="'/home/'"><button class="button" type="button">Retour</button></router-link>
+</div>
     </div>
 </template>
 
