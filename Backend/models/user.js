@@ -3,9 +3,9 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      models.User.hasMany(models.Post, { onDelete: "cascade" });
-      models.User.hasMany(models.Comment, { onDelete: "cascade" });
-      models.User.hasMany(models.Like, { onDelete: "cascade" });
+      models.users.hasMany(models.posts, { onDelete: "cascade" });
+      models.users.hasMany(models.comments, { onDelete: "cascade" });
+      models.users.hasMany(models.likes, { onDelete: "cascade" });
     }
   }
   User.init(

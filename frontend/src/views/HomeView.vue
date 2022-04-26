@@ -6,7 +6,7 @@
     <div class="Posts">
       <div class="post" v-for="post in posts" :key="post.id">
         <div class="auteur">
-          <p> Publié par {{user.lastname}} {{user.firstname}}</p>
+          <p> Publié par {{post.User.lastname}} {{post.User.firstname}}</p>
           <p> Le {{post.createdAt}}</p>
         </div>
         <div class="contenu">
@@ -22,7 +22,7 @@
 <script>
 // @ is an alias to /src
 import Header from '@/components/Header.vue'
-//import axios from "axios"
+import axios from "axios"
 
 
 export default {
@@ -31,34 +31,22 @@ export default {
     Header
   },
   data(){
+    console.log("Test")
         return{
-            posts:{
-                content:"",
-                pictureURL:"",
-                userId:"",
-                createdAt:""
-            },
-            user: JSON.parse(localStorage.getItem("user")),
-            msgErr :null,
+            posts:[]
         };
     },
-    getAllPosts(){
-      fetch(`http://localhost:3000/api/post/${localStorage.getItem("userId")}`,{
+    mounted(){
+
+      console.log("Je passe bien ici");
+      axios.get("http://localhost:3000/api/post/",{
         headers:{
-          Authorization : `Bearer ${localStorage.getItem("token")}`
-        }
+       Authorization :`Bearer ${localStorage.getItem("token")}`
+     }
       })
-      .then(res=>res.json())
-      .then(data=>{
-        console.log(data);
-        this.posts=data
+      .then((response)=>{
+        this.posts = response.data.posts;
       })
-      // axios.get("http://localhost:3000/api/post/",{
-      //   content : this.posts.content
-      // })
-      // .then((response)=>{
-      //   console.log(response);
-      // })
     }
   
 }

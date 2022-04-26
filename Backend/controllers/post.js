@@ -1,8 +1,8 @@
 const models = require("../models");
-const like = require("../models/like");
 const Post = models.posts;
 const Comment = models.comments;
 const Like = models.likes;
+const User = models.users;
 
 exports.createPost = (req, res, next) => {
   console.log("salutations");
@@ -62,14 +62,15 @@ exports.deletePost = (req, res, next) => {
 exports.findAllPosts = (req, res, next) => {
   Post.findAll({
     order: [["id", "DESC"]],
+    include: { model: User, required: true },
   })
     .then((posts) => {
       res.status(200).json({ posts });
     })
-    .catch((error) => res.status(400).json({ error }));
+    .catch((error) => res.status(400).json(error));
 };
 
-exports.findAllPostsUser = (req, res, next) => {
+/*exports.findAllPostsUser = (req, res, next) => {
   Post.findAll({
     where: { userId: req.params.id },
     order: [["id", "DESC"]],
@@ -77,8 +78,8 @@ exports.findAllPostsUser = (req, res, next) => {
     .then((post) => {
       res.status(200).json({ posts });
     })
-    .catch((error) => res.status(400).json({ error }));
-};
+    .catch((error) => res.status(400).json(error));
+};*/
 
 exports.findOne = (req, res, next) => {
   Post.findOne({ where: { id: req.params.id } })

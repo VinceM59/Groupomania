@@ -7,15 +7,15 @@
           <h1>Bienvenue sur votre profil</h1>
           <form class="modifications">
             <label for="file" class="profileLabel">
-              <div class="changeInfo">
+              <!-- <div class="changeInfo">
                 <img class="avatar" :src="Backend/images" :alt="user.avatar">
-                </div>
-                <div>
+                </div> -->
+                <!-- <div>
                     Changer d'image de profil :
-                </div>
+                </div> -->
                 <div class="changeInfo">
                     <img id="avatar" :src="user.avatar" :alt="user.avatar" class="avatar">  
-                    <label>Fichier :<input name="image" id="image" type="file" @change="onFileChange"/></label> 
+                    <!-- <label>Fichier :<input name="image" id="image" type="file" @change="onFileChange"/></label>  -->
                 </div>                
             </label>
               <div class="changeInfo">
@@ -34,7 +34,7 @@
                 <input type="email" class="form-control" v-model="email" id="email" placeholder="email@example.com" required /><br>
               </div>
               <div class="changeInfo">
-                <p class="name"> Mot de passe: <span>{{user.password}}</span></p> 
+                <!-- <p class="name"> Mot de passe: <span>{{user.password}}</span></p>  -->
                 <label for="password">Changer mon mot de passe : </label>
                 <input type="password" class="form-control" v-model="password" id="password"  required /><br>
               </div>
