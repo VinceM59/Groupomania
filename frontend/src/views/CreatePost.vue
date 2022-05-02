@@ -60,28 +60,6 @@ export default {
 				alert("erreur")
 			})
     }
-
-
-
-        // createPost(){
-        //     const request = new XMLHttpRequest()
-        //     request.open("post", "http://localhost:3000/api/post", true);
-        //     request.setRequestHeader(
-        //         "authorization",
-        //         "Bearer" + localStorage.getItem("token")
-        //     );
-        //     const formData = new formData();
-        //     formData.append("text", this.post.content)
-        //     formData.append("image", this.post.pictureUrl)
-        //     request.send(formData)
-        //     request.onreadystatechange=()=>{
-        //         if (request.readyState == XMLHttpRequest.DONE){
-        //             if (request.status ==201){
-        //                 this.$router.go(0);
-        //             }
-        //         }
-        //     };
-        // },
 }
 }
 </script>

@@ -52,7 +52,7 @@ submit(){
                 localStorage.setItem("userId", data.userId)
                 localStorage.setItem("token", data.token)
                 if (res.status ===200){
-                    router.push("/profile")
+                    router.push("/home")
                 }else{
                     alert("erreur email ou mot de passe")
                 }

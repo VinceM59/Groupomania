@@ -4,6 +4,7 @@ import Signup from "../views/Signup-form.vue";
 import login from "../views/Login-form.vue";
 import CreatePost from "../views/CreatePost.vue";
 import Profil from "../views/Profile-form.vue";
+import ModifyProfile from "../views/ModifyProfile";
 const routes = [
   {
     path: "/",
@@ -29,6 +30,11 @@ const routes = [
     path: "/profile",
     name: "profil-form",
     component: Profil,
+  },
+  {
+    path: "/modifyProfile",
+    name: "ModifyProfile",
+    component: ModifyProfile,
   },
 ];
 

@@ -5,49 +5,31 @@
         </div> 
       <div class="profil">
           <h1>Bienvenue sur votre profil</h1>
-          <form class="modifications">
+          <form class="profileUser">
             <label for="file" class="profileLabel">
-              <!-- <div class="changeInfo">
-                <img class="avatar" :src="Backend/images" :alt="user.avatar">
-                </div> -->
-                <!-- <div>
-                    Changer d'image de profil :
-                </div> -->
-                <div class="changeInfo">
-                    <img id="avatar" :src="user.avatar" :alt="user.avatar" class="avatar">  
-                    <!-- <label>Fichier :<input name="image" id="image" type="file" @change="onFileChange"/></label>  -->
-                </div>                
+              <div class="profileContainer">
+                <img :src="user.avatar" :alt="user.avatar" class="profile">   
+              </div>
             </label>
               <div class="changeInfo">
                 <p class="name"> Prénom: <span>{{user.firstname}}</span></p> 
-                <label for="firstname">Changer mon prénom : </label>
-                <input type="firstname" class="form-control" v-model="firstname" id="firstname" placeholder="Patrick" required /><br>
               </div>
               <div class="changeInfo">
                 <p class="name"> Nom: <span>{{user.lastname}}</span></p> 
-                <label for="lastname">Changer mon nom : </label>
-                <input type="lastname" class="form-control" v-model="lastname" id="lastname" placeholder="Dupond" required /><br>
               </div>
               <div class="changeInfo">
                 <p class="name"> Email: <span>{{user.email}}</span></p> 
-                <label for="email">Changer mon Adresse Email : </label>
-                <input type="email" class="form-control" v-model="email" id="email" placeholder="email@example.com" required /><br>
               </div>
-              <div class="changeInfo">
-                <!-- <p class="name"> Mot de passe: <span>{{user.password}}</span></p>  -->
-                <label for="password">Changer mon mot de passe : </label>
-                <input type="password" class="form-control" v-model="password" id="password"  required /><br>
-              </div>
-              
           </form>
       </div>
-      <button type="submit" value="modifier" class="button" @click.prevent="modifyProfile()">Modifier </button>
+      
+      <router-link to="/ModifyProfile"><button class="button" type="button">Modifier</button></router-link>
       <router-link :to="'/home/'"><button class="button" type="button">Retour</button></router-link>
   </main>
 </template>
 
 <script>
-//import axios from "axios"
+
 export default {
   // eslint-disable-next-line
   name:"Profile",
@@ -61,52 +43,34 @@ export default {
         avatar:"",
         password:""
       },
+      change:{
+        firstname:"",
+      },
       msgErr :null,
     };
   },
-  beforeCreate(){
-    fetch(`http://localhost:3000/api/user/${localStorage.getItem("userId")}`,{
-      headers:{
-        Authorization :`Bearer ${localStorage.getItem("token")}`
-      }
-    })
-    .then(res=>res.json())
-    .then(data=>{
-      console.log(data);
-      data.createdAt = data.createdAt.split("U")[0]
-      data.avatar = `http://localhost:3000/images/${data.avatar}`
-      this.user =data
-      localStorage.setItem("user", JSON.stringify(data))
-      //console.log(user);
-    })
-    .catch(error=>{error})
-  },
-  // data (){
-  //   return{
-  //     user:{}
-  //   }
-  // },
-
-  // methods:{
-
-  //   modifyProfile(){
-  //     const userId = localStorage.getItem("userId")
-  //     const email = document.querySelector("#email").value;
-
-  //     let user ={
-  //       email:email
-  //     };
-
-  //     axios.put("http://localhost:3000/api/user/" + userId, user, {
-  //       headers:{
-  //         "Content-Type": "application/json",
-  //             Authorization: "Bearer " + localStorage.getItem ("token")
-  //       }
-  //     })
-  //   }
-  // }
-
-}
+    beforeCreate(){
+      fetch(`http://localhost:3000/api/user/${localStorage.getItem("userId")}`,{
+        headers:{
+          Authorization :`Bearer ${localStorage.getItem("token")}`
+        }
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        console.log(data);
+        data.createdAt = data.createdAt.split("U")[0]
+        data.avatar = `http://localhost:3000/images/${data.avatar}`
+        this.user =data
+        //console.log(user);
+      })
+      .catch(error=>{error})
+    },
+  
+    
+  }
+  
+     
+  
 </script>
 
 <style scoped>
