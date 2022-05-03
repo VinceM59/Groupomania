@@ -34,6 +34,7 @@
 
 <script>
 import axios from "axios"
+import router from "../router"
 export default {
   name:"ModifyProfile",
 
@@ -61,7 +62,7 @@ export default {
     },
 
     methods:{
-      modifyProfile(){
+      modifyProfil(){
         console.log("je passe ici");
         axios.put(`http://localhost:3000/api/user/${localStorage.getItem("userId")}`, {
           firstname:this.user.firstname,
@@ -75,6 +76,7 @@ export default {
         .then((response)=>{
         console.log(response)
         this.firstname=response.firstname
+        router.push("/profile")
         })
 
         .catch((error)=>console.log(error))

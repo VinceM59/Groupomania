@@ -19,18 +19,18 @@
           <img class="picture" alt="post.pictureURL" src="">
         </div>
         <button v-if="post.userId" @click="deletePost(PostId)">SUPPRIMER</button>
+        <div class="comments">
+          <div class="commentaire" v-for="comment in post.Comments" :key="comment.id">
+            <p>{{ comment.content }}</p>
+            <span>auteur: {{comment.User.lastname}} {{comment.User.firstname}} {{ comment.createdAt }}
+            <button v-if="comment.userId === newComment.userId" @click="deleteComment(comment.id)">SUPPRIMER</button></span>
+          </div>
+        </div>
+        <div class="newComment">
+          <textarea id="comment" placeholder="Commentaire..." v-model="comment"></textarea>
+          <button @click="postComment">AJOUTER UN COMMENTAIRE</button>
+        </div>
       </div>
-    <div class="comments">
-			<div class="commentaire" v-for="comment in comments" :key="comment.id">
-				<p>{{ comment.content }}</p>
-				<span>auteur: {{comment.User.lastname}} {{comment.User.firstname}} {{ comment.createdAt }}
-				<button v-if="comment.userId === newComment.userId" @click="deleteComment(comment.id)">SUPPRIMER</button></span>
-			</div>
-		</div>
-		<div class="newComment">
-			<textarea id="comment" placeholder="Commentaire..." v-model="comment"></textarea>
-			<button @click="postComment">AJOUTER UN COMMENTAIRE</button>
-		</div>
     </div>
   </div>
 </template>
@@ -69,14 +69,16 @@ export default {
         this.posts = response.data.posts;
       })
     },
-    deletePost(PostId)	{
-      console.log("je suis là");
-			axios.delete(`http://localhost:3000/api/post/` + PostId)
-			.then(res => {
-				console.log(res.data);
-			})
-			.catch(err => {console.log(err)});
-		},
+    methods: {
+      deletePost(PostId)	{
+        console.log("je suis là");
+        axios.delete(`http://localhost:3000/api/post/` + PostId)
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(err => {console.log(err)});
+      }
+    }
     
   
 }

@@ -22,7 +22,7 @@ exports.modifyUser = (req, res, next) => {
         }`,
       }
     : { ...req.body };
-  userUpdateOne(
+  User.update(
     { ...userObject, id: req.params.id },
     { where: { id: req.params.id } }
   )

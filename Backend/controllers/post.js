@@ -10,9 +10,9 @@ exports.createPost = (req, res, next) => {
   const post = new Post({
     content: req.body.post,
     userId: req.body.userId,
-    // pictureURL: `${req.protocol}://${req.get("host")}/images/${
-    //   req.file.filename
-    // }`,
+    pictureURL: `${req.protocol}://${req.get("host")}/images/${
+      req.body.file.name
+    }`,
   });
 
   post
@@ -64,7 +64,10 @@ exports.deletePost = (req, res, next) => {
 exports.findAllPosts = (req, res, next) => {
   Post.findAll({
     order: [["id", "DESC"]],
-    include: { model: User, required: true },
+    include: [
+      { model: User, required: true },
+      { model: Comment, required: false, include: User },
+    ],
   })
     .then((posts) => {
       res.status(200).json({ posts });
