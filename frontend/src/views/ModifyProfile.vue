@@ -27,6 +27,7 @@
                 <input type="password" class="form-control" v-model="password" id="password"  required /><br>
               </div> -->
               <button  id="modifyButton"  @click.prevent="modifyProfil()">Valider</button>
+              <button id="deleteProfile" @click.prevent="deleteProfil()">Supprimer le compte</button>
       <router-link :to="'/Profile/'"><button class="button" type="button">Retour</button></router-link>
       </form>
 </div>
@@ -77,6 +78,24 @@ export default {
         console.log(response)
         this.firstname=response.firstname
         router.push("/profile")
+        })
+
+        .catch((error)=>console.log(error))
+      },
+
+
+       deleteProfil(){
+        console.log("ça passe là");
+        axios.delete(`http://localhost:3000/api/user/${localStorage.getItem("userId")}`,{
+          headers: {
+                        "Authorization": "Bearer " + localStorage.getItem ("token")
+                    }
+        })
+        .then((response)=>{
+        console.log(response)
+        alert("Utiisateur supprimé !")
+        localStorage.clear()
+        router.push("/")
         })
 
         .catch((error)=>console.log(error))
