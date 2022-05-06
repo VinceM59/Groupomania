@@ -18,7 +18,7 @@
           <p class="text">{{post.content}}</p>
           <img class="picture" alt="post.pictureURL" src="">
         </div>
-        <button v-if="post.userId" @click="deletePost(PostId)">SUPPRIMER</button>
+        <button v-if="post.userId" @click="deletePost(Post.id)">SUPPRIMER</button>
         <div class="comments">
           <div class="commentaire" v-for="comment in post.Comments" :key="comment.id">
             <p>{{ comment.content }}</p>
@@ -67,12 +67,17 @@ export default {
       })
       .then((response)=>{
         this.posts = response.data.posts;
+        console.log(response.data.posts);
       })
     },
     methods: {
-      deletePost(PostId)	{
+      deletePost(postId)	{
         console.log("je suis là");
-        axios.delete(`http://localhost:3000/api/post/` + PostId)
+        axios.delete(`http://localhost:3000/api/post/` + postId,{
+        headers:{
+       Authorization :`Bearer ${localStorage.getItem("token")}`
+     }
+      })
         .then(res => {
           console.log(res.data);
         })

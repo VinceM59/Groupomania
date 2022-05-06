@@ -9,5 +9,6 @@ router.get("/", userCtrl.findAllUsers);
 router.get("/:id", userCtrl.findOneUser);
 router.get("/:id", userCtrl.findAllUserName);
 router.put("/:id", multer, userCtrl.modifyUser);
+router.delete("/:id", userCtrl.deleteUser);
 
 module.exports = router;

@@ -46,3 +46,11 @@ exports.findAllUserName = (req, res, next) => {
     })
     .catch((error) => res.status(404).json({ error }));
 };
+
+exports.deleteUser = (req, res, next) => {
+  User.destroy({ where: { id: req.params.id } })
+    .then((user) => {
+      res.status(200).json(user);
+    })
+    .catch((error) => res.status(404).json({ error }));
+};
