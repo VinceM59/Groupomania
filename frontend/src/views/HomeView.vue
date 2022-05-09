@@ -19,6 +19,7 @@
           <img class="picture" alt="post.pictureURL" src="">
         </div>
         <button v-if="post.userId" @click="deletePost(Post.id)">SUPPRIMER</button>
+        
         <div class="comments">
           <div class="commentaire" v-for="comment in post.Comments" :key="comment.id">
             <p>{{ comment.content }}</p>
@@ -26,9 +27,9 @@
             <button v-if="comment.userId === newComment.userId" @click="deleteComment(comment.id)">SUPPRIMER</button></span>
           </div>
         </div>
-        <div class="newComment">
-          <textarea id="comment" placeholder="Commentaire..." v-model="comment"></textarea>
-          <button @click="postComment">AJOUTER UN COMMENTAIRE</button>
+        <div class="newComment"  @submit.prevent="createComment()">
+          <textarea id="comment" placeholder="Commentaire..." v-model="comment.content"></textarea>
+          <button @click="createComment">AJOUTER UN COMMENTAIRE</button>
         </div>
       </div>
     </div>
@@ -41,6 +42,7 @@ import Header from '@/components/Header.vue'
 import axios from "axios"
 
 
+
 export default {
   name: 'HomeView',
   components: {
@@ -51,14 +53,15 @@ export default {
         return{
             posts:[],
             comments :[],
-            newComment:{
+            comment:{
               userId:localStorage.getItem("userId"),
-              comment:"",
+              content:null,
+              postId:null,
             }
         };
     },
     mounted(){
-
+      console.log(this.posts);
       console.log("Je passe bien ici");
       axios.get("http://localhost:3000/api/post/",{
         headers:{
@@ -69,6 +72,8 @@ export default {
         this.posts = response.data.posts;
         console.log(response.data.posts);
       })
+      console.log("hola");
+      console.log(this.posts.content);
     },
     methods: {
       deletePost(postId)	{
@@ -82,7 +87,28 @@ export default {
           console.log(res.data);
         })
         .catch(err => {console.log(err)});
-      }
+      },
+
+      createComment(){
+          console.log(this.comment);
+            axios.post("http://localhost:3000/api/comment/",{
+                comment:this.comment.content,
+                userId:this.comment.userId,
+                postId:this.comment.postId
+            }, {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem ("token")
+                }
+            })
+            .then((res)=>{
+				console.log(res);
+				alert("Commentaire publié")
+			})
+			.catch((error)=>{
+				console.log(error);
+				//alert("erreur")
+			})
+    },
     }
     
   

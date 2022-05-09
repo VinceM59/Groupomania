@@ -48,7 +48,8 @@ exports.modifyPost = (req, res, next) => {
 };
 
 exports.deletePost = (req, res, next) => {
-  Comment.destroy({ where: { postId: req.params.id } })
+  console.log("salut");
+  Comment.destroy({ where: { id: req.params.id } })
     .then(() =>
       like
         .destroy({ where: { postId: req.params.id } })
