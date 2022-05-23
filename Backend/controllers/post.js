@@ -11,7 +11,7 @@ exports.createPost = (req, res, next) => {
     content: req.body.post,
     userId: req.body.userId,
     pictureURL: `${req.protocol}://${req.get("host")}/images/${
-      req.body.file.name
+      req.body.image.name
     }`,
   });
 
@@ -48,16 +48,14 @@ exports.modifyPost = (req, res, next) => {
 };
 
 exports.deletePost = (req, res, next) => {
-  console.log("salut");
-  Comment.destroy({ where: { id: req.params.id } })
+  console.log("salut delete post");
+  Post.destroy({ where: { id: req.params.id } })
     .then(() =>
-      like
-        .destroy({ where: { postId: req.params.id } })
-        .then(() =>
-          Post.destroy({ where: { id: req.params.id } }).then(() =>
-            res.status(200).json({ message: "Post supprimé !" })
-          )
+      Like.destroy({ where: { PostId: req.params.id } }).then(() =>
+        Comment.destroy({ where: { PostId: req.params.id } }).then(() =>
+          res.status(200).json({ message: "Post supprimé !" })
         )
+      )
     )
     .catch((error) => res.status(400).json({ error }));
 };

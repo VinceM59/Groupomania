@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
+const cors = require("cors");
 const auth = require("./middleware/auth");
 const helmet = require("helmet");
 
@@ -13,7 +14,7 @@ const userRoutes = require("./routes/user");
 const app = express();
 
 //app.use(helmet({ crossOriginResourcePolicy: false }));
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
   console.log(req.headers);
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -25,7 +26,9 @@ app.use((req, res, next) => {
     "GET, POST, PUT, DELETE, PATCH, OPTIONS"
   );
   next();
-});
+});*/
+
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

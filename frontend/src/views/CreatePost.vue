@@ -10,7 +10,7 @@
     >
       <h3>Créer votre post :</h3>
       <label>Texte :<input name="text" id="text" type="text" v-model="post.content"/></label>
-      <label>Fichier :<input name="image" id="image" ref="file" type="file" @change="handleFile"/></label>
+      <label>Fichier :<input name="image" id="image" ref="image" type="file" @change="handleFile"/></label>
       <button
         v-on:click.prevent.stop="createPost"
         aria-label="Postez"
@@ -36,7 +36,7 @@ export default {
             post:{
                 content:null,
                 pictureURL:null,
-                file:null,
+                image:null,
                 userId:localStorage.getItem("userId"),
             }
         }
@@ -44,11 +44,13 @@ export default {
     methods:{
         createPost(){
           console.log(this.post);
-            axios.post("http://localhost:3000/api/post",{
-                post:this.post.content,
-                file:this.post.file,
-                userId:this.post.userId
-            }, {
+          let formData = new FormData();
+          formData.append("post", this.post.content);
+          formData.append("userId", this.post.userId);
+          formData.append("image", this.post.image);
+
+          
+            axios.post("http://localhost:3000/api/post",formData, {
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem ("token")
                 }
@@ -64,8 +66,9 @@ export default {
     },
      
     handleFile: function () {
-      const file = this.$refs.file.files[0];
-      this.post.file = file;
+      const file = this.$refs.image.files[0];
+      console.log(file);
+      this.post.image = file;
     }
 }
 }

@@ -3,10 +3,11 @@ const Comment = models.comments;
 
 exports.createComment = (req, res, next) => {
   console.log("salutations");
+  console.log(req.body);
   const comment = new Comment({
-    content: req.body.content,
-    userId: req.body.userId,
-    postId: req.body.userId,
+    content: req.body.comment,
+    UserId: req.body.userId,
+    PostId: req.body.postId,
   });
   comment
     .save()

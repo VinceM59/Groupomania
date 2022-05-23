@@ -18,7 +18,7 @@
           <p class="text">{{post.content}}</p>
           <img class="picture" alt="post.pictureURL" src="">
         </div>
-        <button v-if="post.userId" @click="deletePost(Post.id)">SUPPRIMER</button>
+        <button v-if="post.userId" @click="deletePost(post.id)">SUPPRIMER</button>
         
         <div class="comments">
           <div class="commentaire" v-for="comment in post.Comments" :key="comment.id">
@@ -29,7 +29,7 @@
         </div>
         <div class="newComment"  @submit.prevent="createComment()">
           <textarea id="comment" placeholder="Commentaire..." v-model="comment.content"></textarea>
-          <button @click="createComment">AJOUTER UN COMMENTAIRE</button>
+          <button @click="createComment(post.id)">AJOUTER UN COMMENTAIRE</button>
         </div>
       </div>
     </div>
@@ -89,12 +89,12 @@ export default {
         .catch(err => {console.log(err)});
       },
 
-      createComment(){
+      createComment(postId){
           console.log(this.comment);
             axios.post("http://localhost:3000/api/comment/",{
                 comment:this.comment.content,
                 userId:this.comment.userId,
-                postId:this.comment.postId
+                postId:postId
             }, {
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem ("token")
