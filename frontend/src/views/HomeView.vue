@@ -24,7 +24,7 @@
           <div class="commentaire" v-for="comment in post.Comments" :key="comment.id">
             <p>{{ comment.content }}</p>
             <span>auteur: {{comment.User.lastname}} {{comment.User.firstname}} {{ comment.createdAt }}
-            <button v-if="comment.userId === newComment.userId" @click="deleteComment(comment.id)">SUPPRIMER</button></span>
+            <button  @click="deleteComment(comment.id)">SUPPRIMER</button></span>
           </div>
         </div>
         <div class="newComment"  @submit.prevent="createComment()">
@@ -85,6 +85,7 @@ export default {
       })
         .then(res => {
           console.log(res.data);
+          window.location.reload()
         })
         .catch(err => {console.log(err)});
       },
@@ -103,12 +104,17 @@ export default {
             .then((res)=>{
 				console.log(res);
 				alert("Commentaire publié")
+        window.location.reload()
 			})
 			.catch((error)=>{
 				console.log(error);
 				//alert("erreur")
 			})
     },
+    mounted(){
+      console.log(this.comments);
+      console.log("je monte les commentaires");
+    }
     }
     
   
