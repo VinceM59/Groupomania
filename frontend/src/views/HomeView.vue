@@ -11,7 +11,7 @@
                 </div>
         <div class="auteur">
           <p> Publié par {{post.User.lastname}} {{post.User.firstname}}</p>
-          <p> Le {{post.createdAt}}</p>
+          <p> Le {{post.createdAt }}</p>
         </div>
       </div>
         <div class="contenu">
@@ -23,7 +23,7 @@
         <div class="comments">
           <div class="commentaire" v-for="comment in post.Comments" :key="comment.id">
             <p>{{ comment.content }}</p>
-            <span>auteur: {{comment.User.lastname}} {{comment.User.firstname}} {{ comment.createdAt }}
+            <span>Publié par  {{comment.User.lastname}} {{comment.User.firstname}}
             <button  @click="deleteComment(comment.id)">SUPPRIMER</button></span>
           </div>
         </div>
@@ -73,7 +73,6 @@ export default {
         console.log(response.data.posts);
       })
       console.log("hola");
-      console.log(this.posts.content);
     },
     methods: {
       deletePost(postId)	{
@@ -111,10 +110,19 @@ export default {
 				//alert("erreur")
 			})
     },
-    mounted(){
-      console.log(this.comments);
-      console.log("je monte les commentaires");
-    }
+    deleteComment(commentId)	{
+        console.log("je suis dans la suppression des comms");
+        axios.delete(`http://localhost:3000/api/comment/` + commentId,{
+        headers:{
+       Authorization :`Bearer ${localStorage.getItem("token")}`
+     }
+      })
+        .then(res => {
+          console.log(res.data);
+          window.location.reload()
+        })
+        .catch(err => {console.log(err)});
+      },
     }
     
   
