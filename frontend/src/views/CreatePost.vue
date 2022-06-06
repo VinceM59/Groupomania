@@ -35,8 +35,8 @@ export default {
         return{
             post:{
                 content:null,
-                pictureURL:null,
-                image:null,
+                pictureURL:'',
+                image:'',
                 userId:localStorage.getItem("userId"),
             }
         }
@@ -61,7 +61,7 @@ export default {
 			})
 			.catch((error)=>{
 				console.log(error);
-				alert("erreur")
+				alert("Champs manquant")
 			})
     },
      

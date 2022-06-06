@@ -7,12 +7,11 @@ const User = models.users;
 exports.createPost = (req, res, next) => {
   console.log("salutations");
   console.log(req.body);
+  console.log(req);
   const post = new Post({
     content: req.body.post,
     userId: req.body.userId,
-    pictureURL: `${req.protocol}://${req.get("host")}/images/${
-      req.body.image.name
-    }`,
+    pictureURL: `${req.protocol}://${req.get("host")}/images/${req.file.name}`,
   });
 
   post

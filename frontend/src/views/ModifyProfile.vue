@@ -6,8 +6,9 @@
   <form @submit.prevent="modifyProfile">
         <h1>Modification de vos informations</h1>
          <div class="changeInfo">
-                    <!-- <img id="avatar" :src="user.avatar" :alt="user.avatar" class="avatar">   -->
-                    <label>Changer votre photo de profil :<input name="image" id="image" type="file" @change="onFileChange"/></label> 
+                    <!-- <img id="avatar" :src="user.avatar" :alt="user.avatar" class="picture">  
+                    <label>Changer votre photo de profil :<input name="image" id="image" type="file" @change="onFileChange"/></label>  -->
+                    <label>Fichier : <input name="image" id="image" ref="image" type="file" @change="handleFile"/></label>
           </div> 
          
                 <label for="firstname">Changer mon prénom : </label>
@@ -18,7 +19,7 @@
                 <input type="text" id="user-lastname" v-model="user.lastname"  placeholder="Dupond" required /><br>
              
              
-                <label for="email">Changer mon Adresse Email : </label>
+                <label for="email">Changer mon Adresse Email :</label>
                 <input type="email" id="user-email" v-model="user.email"  placeholder="email@example.com" required /><br>
              
               <!-- <div class="changeInfo">
