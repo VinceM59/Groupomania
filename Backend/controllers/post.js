@@ -8,11 +8,17 @@ exports.createPost = (req, res, next) => {
   console.log("salutations");
   console.log(req.body);
   console.log(req);
-  const post = new Post({
+  let newPost = {
     content: req.body.post,
     userId: req.body.userId,
-    pictureURL: `${req.protocol}://${req.get("host")}/images/${req.file.name}`,
-  });
+  };
+
+  if (req.file) {
+    newPost.pictureURL = `${req.protocol}://${req.get("host")}/images/${
+      req.file.name
+    }`;
+  }
+  const post = new Post(newPost);
 
   post
     .save()

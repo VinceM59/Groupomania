@@ -62,6 +62,7 @@ img
   border-radius: 25px;
   background: rgba(23, 35, 60);
   color: white;
+  cursor: pointer;
 }
 .link{
     text-align: center;

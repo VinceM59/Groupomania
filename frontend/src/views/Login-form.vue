@@ -51,6 +51,7 @@ submit(){
                 let data = res.data;
                 localStorage.setItem("userId", data.userId)
                 localStorage.setItem("token", data.token)
+                localStorage.setItem("isAdmin", data.isAdmin)
                 if (res.status ===200){
                     router.push("/home")
                 }else{

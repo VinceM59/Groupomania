@@ -1,7 +1,7 @@
 <template>
   <main>
     <div id="logo">
-            <img src="../assets/icon-left-font-monochrome-black.png" alt="GROUPOMANIA"> 
+           <a href="http://localhost:8080/home/" ><img src="../assets/icon-left-font-monochrome-black.png" alt="GROUPOMANIA"></a> 
         </div> 
       <div class="profil">
           <h1>Bienvenue sur votre profil</h1>
@@ -59,7 +59,7 @@ export default {
       .then(data=>{
         console.log(data);
         data.createdAt = data.createdAt.split("U")[0]
-        data.avatar = `http://localhost:3000/images/${data.avatar}`
+        data.avatar = `${data.avatar}`
         this.user =data
         //console.log(user);
       })

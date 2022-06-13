@@ -1,14 +1,12 @@
 <template>
 <div class="modifyProfile">
   <div id="logo">
-            <img src="../assets/icon-left-font-monochrome-black.png" alt="GROUPOMANIA"> 
+           <a href="http://localhost:8080/home/" ><img src="../assets/icon-left-font-monochrome-black.png" alt="GROUPOMANIA"></a>
         </div> 
   <form @submit.prevent="modifyProfile">
         <h1>Modification de vos informations</h1>
          <div class="changeInfo">
-                    <!-- <img id="avatar" :src="user.avatar" :alt="user.avatar" class="picture">  
-                    <label>Changer votre photo de profil :<input name="image" id="image" type="file" @change="onFileChange"/></label>  -->
-                    <label>Fichier : <input name="image" id="image" ref="image" type="file" @change="handleFile"/></label>
+                    <label>Fichier : <input name="avatar" id="avatar" ref="avatar" type="file" @change="handleFile"/></label>
           </div> 
          
                 <label for="firstname">Changer mon prénom : </label>
@@ -28,8 +26,8 @@
                 <input type="password" class="form-control" v-model="password" id="password"  required /><br>
               </div> -->
               <button  id="modifyButton"  @click.prevent="modifyProfil()">Valider</button>
-              <button id="deleteProfile" @click.prevent="deleteProfil()">Supprimer le compte</button>
       <router-link :to="'/Profile/'"><button class="button" type="button">Retour</button></router-link>
+              <button id="deleteProfile" @click.prevent="deleteProfil()">Supprimer le compte</button>
       </form>
 </div>
 </template>
@@ -46,6 +44,7 @@ export default {
         firstname:"",
         lastname:"",
         email:"",
+        avatar:"",
       }
     },
   beforeCreate(){
@@ -66,11 +65,13 @@ export default {
     methods:{
       modifyProfil(){
         console.log("je passe ici");
-        axios.put(`http://localhost:3000/api/user/${localStorage.getItem("userId")}`, {
-          firstname:this.user.firstname,
-          lastname:this.user.lastname,
-          email:this.user.email,
-        },{
+        let formData = new FormData();
+        formData.append("firstname", this.user.firstname);
+        formData.append("lastname", this.user.lastname);
+        formData.append("email", this.user.email);
+        formData.append("image", this.user.avatar);
+        axios.put(`http://localhost:3000/api/user/${localStorage.getItem("userId")}`,formData ,
+        {
           headers: {
                         "Authorization": "Bearer " + localStorage.getItem ("token")
                     }
@@ -83,6 +84,13 @@ export default {
 
         .catch((error)=>console.log(error))
       },
+
+      handleFile: function () {
+      const file = this.$refs.avatar.files[0];
+      console.log(file);
+      this.user.avatar = file;
+    },
+
 
 
        deleteProfil(){
@@ -128,6 +136,7 @@ button {
   border-radius: 25px;
   background: rgba(23, 35, 60);
   color: white;
+  cursor: pointer;
 }
 form {
   
@@ -139,4 +148,7 @@ label {
   margin:20px;
 }
 
+#deleteProfile{
+  background-color: red;
+}
 </style>

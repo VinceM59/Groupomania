@@ -1,6 +1,9 @@
 <template>
 
-
+<main>
+       <div id="logo">
+           <a href="http://localhost:8080/home/" ><img src="../assets/icon-left-font-monochrome-black.png" alt="GROUPOMANIA"></a> 
+        </div> 
     <div id="createPost">
         <form
       class="createPost"
@@ -24,10 +27,12 @@
   <router-link :to="'/home/'"><button class="button" type="button">Retour</button></router-link>
 </div>
     </div>
+</main>
 </template>
 
 <script>
 import axios from 'axios';
+import router from "../router"
 export default {
     name:"CreatePost",
     
@@ -58,10 +63,11 @@ export default {
             .then((res)=>{
 				console.log(res);
 				alert("Post publié")
+        router.push("/home")
 			})
 			.catch((error)=>{
 				console.log(error);
-				alert("Champs manquant")
+				alert("Erreur système")
 			})
     },
      
@@ -75,6 +81,16 @@ export default {
 </script>
 
 <style scoped>
+
+#logo
+{
+    text-align: center;
+    margin: -5rem;
+}
+img 
+{
+    height: 12rem;
+}
 
 .description
 {

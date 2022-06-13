@@ -7,7 +7,7 @@
       <div class="post" v-for="post in posts" :key="post.id">
       <div class="userProfile">
         <!-- <div class="profileContainer"> -->
-                    <img :src="'http://localhost:3000/images/' + post.User.avatar" :alt="post.User.avatar" class="profile">    
+                    <img :src="post.User.avatar" :alt="post.User.avatar" class="profile">    
         <!-- </div> -->
         <div class="auteur">
           <p> Publié par {{post.User.lastname}} {{post.User.firstname}}</p>
@@ -16,17 +16,20 @@
       </div>
         <div class="contenu">
           <p class="text">{{post.content}}</p>
+          <div v-if="post.pictureURL" >
           <img class="picture" alt="post.pictureURL" :src="post.pictureURL">
+          </div>
         </div>
         <div >
-        <button  @click="deletePost(post.id)">SUPPRIMER</button>
+        <button  v-if="userId == post.UserId " @click="deletePost(post.id)">SUPPRIMER</button>
         </div>
         <div class="comments">
           <div class="commentaire" v-for="comment in post.Comments" :key="comment.id">
             <p class="text_comment">{{ comment.content }}</p>
-            <span>Publié par  {{comment.User.lastname}} {{comment.User.firstname}}
+            
+            <img :src="comment.User.avatar" :alt="comment.User.avatar" class="profile_comm"> <span class="span">Publié par  {{comment.User.lastname}} {{comment.User.firstname}}
               
-            <button class="button_comment" @click="deleteComment(comment.id)">SUPPRIMER</button></span>
+            <button v-if="userId == comment.UserId" class="button_comment" @click="deleteComment(comment.id)">SUPPRIMER</button></span>
            
           </div>
         </div>
@@ -57,6 +60,8 @@ export default {
         return{
             posts:[],
             comments :[],
+            userId: localStorage.getItem("userId"),
+            isAdmin: localStorage.getItem("isAdmin"),
             comment:{
               userId:localStorage.getItem("userId"),
               content:null,
@@ -175,6 +180,16 @@ export default {
     height: 100%;
     width: 10%;
     object-fit: cover;
+    border-radius: 20%;
+    margin: 2%;
+}
+
+.profile_comm {
+    height: 100%;
+    width: 4%;
+    object-fit: cover;
+    border-radius: 20%;
+    margin: 2%;
 }
 .userProfile{
   display: flex;
@@ -211,6 +226,9 @@ padding-top: 15px;
 	padding-right: 1em;
 	border-radius: 0.5em;
 	font-size: 1rem;
+}
+.span{
+  margin-bottom: 1em;
 }
 	
 </style>
