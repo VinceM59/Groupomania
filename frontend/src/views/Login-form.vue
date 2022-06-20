@@ -98,5 +98,20 @@ label
 img{
     width: 12rem;
 }
+#loginButton {
+    
+    margin: 1rem;
+  font-size: 20px;
+  border-radius: 25px;
+  background: rgba(23, 35, 60);
+  color: white;
+  cursor: pointer;
 
+}
+#loginButton:hover{
+   
+      box-shadow: 0.25rem 0.25rem 10px rgb(0 0 0 / 50%);
+      transition-duration: 900ms;
+      filter: brightness(1.1);
+}
 </style>

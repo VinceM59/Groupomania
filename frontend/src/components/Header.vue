@@ -53,7 +53,7 @@ header
 }
 img 
 {
-    height: 12rem;
+    height: 15rem;
 }
 
 .button {
@@ -64,10 +64,30 @@ img
   color: white;
   cursor: pointer;
 }
+.button:hover{
+   
+      box-shadow: 0.25rem 0.25rem 10px rgb(0 0 0 / 50%);
+      transition-duration: 900ms;
+      filter: brightness(1.1);
+}
 .link{
     text-align: center;
     padding: 1rem;
     text-decoration: none;
     color: rgba(0, 0, 0, 0.75);
+}
+.header{
+    font-size: 2rem;
+    font-family: fantasy;
+}
+
+@media screen and (max-width: 770px){
+  #navigation{
+    display: inline;
+  }
+
+  .profil{
+    border-bottom: 3px solid red;
+  }
 }
 </style>

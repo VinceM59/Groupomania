@@ -28,8 +28,18 @@ exports.findOneComment = (req, res, next) => {
 //modify ?????
 
 exports.deleteComment = (req, res, next) => {
-  Comment.destroy({ where: { id: req.params.id } })
-    .then(() => res.status(200).json({ message: "Commentaire supprimé !" }))
+  Comment.findOne({ where: { id: req.params.id } })
+    .then((comment) => {
+      let token = res.locals.token;
+      if (!(comment.userId === token.userId || token.isAdmin)) {
+        return res.status(401).json({
+          error: "Unauthorized",
+        });
+      }
+      Comment.destroy({ where: { id: req.params.id } })
+        .then(() => res.status(200).json({ message: "Commentaire supprimé !" }))
+        .catch((error) => res.status(400).json({ error }));
+    })
     .catch((error) => res.status(400).json({ error }));
 };
 

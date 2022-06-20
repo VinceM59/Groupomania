@@ -1,6 +1,6 @@
 <template>
 
-<main>
+<main v-if="logged">
        <div id="logo">
            <a href="http://localhost:8080/home/" ><img src="../assets/icon-left-font-monochrome-black.png" alt="GROUPOMANIA"></a> 
         </div> 
@@ -47,7 +47,17 @@ export default {
         }
     },
     methods:{
+       logged() {
+        if (localStorage.getItem('token')) {
+          return false;
+        }
+        return true
+      },
         createPost(){
+          if(!this.post.content) {
+            alert("Contenu post non rempli");
+            return;
+          }
           console.log(this.post);
           let formData = new FormData();
           formData.append("post", this.post.content);

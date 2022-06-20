@@ -54,14 +54,25 @@ exports.modifyPost = (req, res, next) => {
 
 exports.deletePost = (req, res, next) => {
   console.log("salut delete post");
-  Post.destroy({ where: { id: req.params.id } })
-    .then(() =>
-      Like.destroy({ where: { PostId: req.params.id } }).then(() =>
-        Comment.destroy({ where: { PostId: req.params.id } }).then(() =>
-          res.status(200).json({ message: "Post supprimé !" })
+
+  Post.findOne({ where: { id: req.params.id } })
+    .then((post) => {
+      let token = res.locals.token;
+      if (!(post.userId === token.userId || token.isAdmin)) {
+        return res.status(401).json({
+          error: "Unauthorized",
+        });
+      }
+      Post.destroy({ where: { id: req.params.id } })
+        .then(() =>
+          Like.destroy({ where: { PostId: req.params.id } }).then(() =>
+            Comment.destroy({ where: { PostId: req.params.id } }).then(() =>
+              res.status(200).json({ message: "Post supprimé !" })
+            )
+          )
         )
-      )
-    )
+        .catch((error) => res.status(400).json({ error }));
+    })
     .catch((error) => res.status(400).json({ error }));
 };
 

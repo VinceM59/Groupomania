@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" v-if="logged">
     <div>
     <Header />
     </div>
@@ -21,15 +21,17 @@
           </div>
         </div>
         <div >
-        <button  v-if="userId == post.UserId " @click="deletePost(post.id)">SUPPRIMER</button>
+        <button v-if="userId == post.UserId || isAdmin" @click="deletePost(post.id)">SUPPRIMER</button>
         </div>
         <div class="comments">
           <div class="commentaire" v-for="comment in post.Comments" :key="comment.id">
             <p class="text_comment">{{ comment.content }}</p>
-            
-            <img :src="comment.User.avatar" :alt="comment.User.avatar" class="profile_comm"> <span class="span">Publié par  {{comment.User.lastname}} {{comment.User.firstname}}
+            <div class="info_comm">
+            <img :src="comment.User.avatar" :alt="comment.User.avatar" class="profile_comm"> 
+            <span class="span">Publié par  {{comment.User.lastname}} {{comment.User.firstname}}</span>
+            <button v-if="userId == comment.UserId || isAdmin" class="button_comment" @click="deleteComment(comment.id)">SUPPRIMER</button>
+            </div>
               
-            <button v-if="userId == comment.UserId" class="button_comment" @click="deleteComment(comment.id)">SUPPRIMER</button></span>
            
           </div>
         </div>
@@ -61,7 +63,7 @@ export default {
             posts:[],
             comments :[],
             userId: localStorage.getItem("userId"),
-            isAdmin: localStorage.getItem("isAdmin"),
+            isAdmin: (localStorage.getItem("isAdmin") === "true"),
             comment:{
               userId:localStorage.getItem("userId"),
               content:null,
@@ -71,6 +73,9 @@ export default {
         };
     },
     mounted(){
+      if (!localStorage.getItem('token')) {
+        window.location = "/"
+      }
       console.log(this.posts);
       console.log("Je passe bien ici");
       axios.get("http://localhost:3000/api/post/",{
@@ -85,6 +90,13 @@ export default {
       console.log("hola");
     },
     methods: {
+
+      logged() {
+        if (localStorage.getItem('token')) {
+          return false;
+        }
+        return true
+      },
 
       deletePost(postId)	{
         console.log("je suis là");
@@ -125,13 +137,13 @@ export default {
 				//alert("erreur")
 			})
     },
-    auth(commentUserId) {
+    // auth(commentUserId) {
            
-            if (this.userId !== commentUserId) {
-                return false
-            }
-            return true              
-        },
+    //         if (this.userId !== commentUserId) {
+    //             return false
+    //         }
+    //         return true              
+    //     },
     deleteComment(commentId)	{
         console.log("je suis dans la suppression des comms");
         axios.delete(`http://localhost:3000/api/comment/` + commentId,{
@@ -188,7 +200,7 @@ export default {
     height: 100%;
     width: 4%;
     object-fit: cover;
-    border-radius: 20%;
+    border-radius: 50%;
     margin: 2%;
 }
 .userProfile{
@@ -198,11 +210,20 @@ export default {
     text-align: left;
 }
 button {
+    background: linear-gradient(#00c6fb, #005bea);
+    padding: 0.75rem 1rem;
+    color: #F5F5F5;
+    border-radius: 100px;
+    cursor: pointer;
+    box-shadow: 0 0 16px #0000002e;
+    font-size: 0.8rem;
     margin: 1rem;
-  font-size: 20px;
-  border-radius: 25px;
-  background: rgb(50, 76, 133);
-  color: white;
+}
+button:hover{
+ background-color: #F5F5F5;
+      box-shadow: 0.25rem 0.25rem 10px rgb(0 0 0 / 50%);
+      transition-duration: 800ms;
+      filter: brightness(1.1);
 }
 .picture {
   width: 40%;
@@ -215,10 +236,11 @@ button {
   margin: 28px;
 }
 p{
-  font-size: 1.2em;
+  font-size: 1em;
 }
 .text_comment{
 padding-top: 15px;
+font-size: 1.2em;
 }
 .button_comment{
 	padding:0.3em;
@@ -227,8 +249,21 @@ padding-top: 15px;
 	border-radius: 0.5em;
 	font-size: 1rem;
 }
-.span{
+/* .span{
   margin-bottom: 1em;
+} */
+
+.info_comm{
+      display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
 }
-	
+
+
+@media screen and (max-width: 992px){
+  #navigation{
+    width: 10%;
+  }
+}
 </style>

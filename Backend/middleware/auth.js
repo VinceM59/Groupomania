@@ -12,6 +12,7 @@ module.exports = (req, res, next) => {
     if (!userId) {
       throw "User ID non valide";
     } else {
+      res.locals.token = decodedToken;
       next();
     }
     console.log("erreur");
