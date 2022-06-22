@@ -31,7 +31,8 @@ exports.deleteComment = (req, res, next) => {
   Comment.findOne({ where: { id: req.params.id } })
     .then((comment) => {
       let token = res.locals.token;
-      if (!(comment.userId === token.userId || token.isAdmin)) {
+      if (!(comment.UserId === token.userId || token.isAdmin)) {
+        console.log("erreur token");
         return res.status(401).json({
           error: "Unauthorized",
         });
